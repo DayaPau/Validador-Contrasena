@@ -500,7 +500,7 @@ Como mejoras futuras se recomienda:
 Proyecto desarrollado por:
 
 ```text
-Dayana Vallejos
+Vanessa Torres y Dayana Vallejos
 ```
 
 Materia:
