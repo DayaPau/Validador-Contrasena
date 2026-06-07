@@ -57,4 +57,8 @@ public class ValidadorContrasena {
                 && contieneMayuscula(contrasena)
                 && contieneCaracterEspecial(contrasena);
     }
+    
+    public boolean ContieneEspacios(String contrasena) {
+        return contrasena != null && contrasena.contains(" ");
+    }
 }
