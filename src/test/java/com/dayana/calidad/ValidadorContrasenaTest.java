@@ -17,15 +17,46 @@ class ValidadorContrasenaTest {
 
     @Test
     void deberiaAceptarContrasenaValida() {
-        boolean resultado = validador.esValida("Calidad1#");
-
-        assertTrue(resultado);
+        assertTrue(validador.esValida("Calidad1#"));
     }
 
     @Test
     void deberiaRechazarContrasenaNula() {
-        boolean resultado = validador.esValida(null);
+        assertFalse(validador.esValida(null));
+    }
 
-        assertFalse(resultado);
+    @Test
+    void deberiaRechazarContrasenaCorta() {
+        assertFalse(validador.esValida("Cal1#"));
+    }
+
+    @Test
+    void deberiaRechazarContrasenaSinNumero() {
+        assertFalse(validador.esValida("Calidad#"));
+    }
+
+    @Test
+    void deberiaRechazarContrasenaSinMayuscula() {
+        assertFalse(validador.esValida("calidad1#"));
+    }
+
+    @Test
+    void deberiaRechazarContrasenaSinCaracterEspecial() {
+        assertFalse(validador.esValida("Calidad12"));
+    }
+
+    @Test
+    void deberiaRechazarContrasenaConEspacio() {
+        assertFalse(validador.esValida("Calidad 1#"));
+    }
+
+    @Test
+    void deberiaDetectarEspaciosDuplicados() {
+        assertTrue(validador.tieneEspaciosDuplicados("Calidad  1#"));
+    }
+
+    @Test
+    void deberiaRetornarFalsoSiNoTieneEspaciosDuplicados() {
+        assertFalse(validador.tieneEspaciosDuplicados("Calidad1#"));
     }
 }

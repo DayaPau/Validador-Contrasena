@@ -51,14 +51,19 @@ public class ValidadorContrasena {
         return false;
     }
 
+    public boolean contieneEspacios(String contrasena) {
+        return contrasena != null && contrasena.contains(" ");
+    }
+
+    public boolean tieneEspaciosDuplicados(String contrasena) {
+        return contrasena != null && contrasena.contains("  ");
+    }
+
     public boolean esValida(String contrasena) {
         return esLongitudValida(contrasena)
                 && contieneNumero(contrasena)
                 && contieneMayuscula(contrasena)
-                && contieneCaracterEspecial(contrasena);
-    }
-    
-    public boolean ContieneEspacios(String contrasena) {
-        return contrasena != null && contrasena.contains(" ");
+                && contieneCaracterEspecial(contrasena)
+                && !contieneEspacios(contrasena);
     }
 }
