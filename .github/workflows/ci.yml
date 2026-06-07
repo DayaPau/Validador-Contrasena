@@ -1,0 +1,45 @@
+name: CI - Metricas de Calidad
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-quality:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Descargar codigo fuente
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+          cache: 'maven'
+
+      - name: Construir proyecto
+        run: mvn clean install
+
+      - name: Ejecutar pruebas unitarias
+        run: mvn test
+
+      - name: Generar metricas de calidad
+        run: mvn verify
+
+      - name: Guardar reportes de calidad
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: reportes-calidad
+          path: |
+            target/site/jacoco/
+            target/checkstyle-result.xml
+            target/pmd.xml
+            target/site/pmd.html
+            target/surefire-reports/
